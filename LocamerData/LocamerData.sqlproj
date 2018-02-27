@@ -66,5 +66,6 @@
     <Build Include="Reservation.sql" />
     <Build Include="Option.sql" />
     <Build Include="Detail_Option.sql" />
+    <Build Include="Emplacement_Sejour.sql" />
   </ItemGroup>
 </Project>
