@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Emplacement]
 (
-	[codeEmplacement]      INT           IDENTITY (1, 1) NOT NULL,
+	[codeEmplacement]      NVARCHAR (3) NOT NULL,
     [codeTarif]       INT NULL,
     [capacite]      INT NULL,
     [terrasse]		BIT      NULL,

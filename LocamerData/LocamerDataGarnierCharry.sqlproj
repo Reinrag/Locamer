@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>LocamerData</Name>
+    <Name>LocamerDataGarnierCharry</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{9ed1d98a-b1c8-4eea-9149-b0f77562b312}</ProjectGuid>
@@ -64,8 +64,11 @@
     <Build Include="Tarif.sql" />
     <Build Include="Emplacement.sql" />
     <Build Include="Reservation.sql" />
-    <Build Include="Option.sql" />
+    <Build Include="Options.sql" />
     <Build Include="Detail_Option.sql" />
     <Build Include="Emplacement_Sejour.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>

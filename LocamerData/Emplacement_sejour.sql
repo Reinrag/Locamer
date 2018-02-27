@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Emplacement_Sejour]
 (
 	[codeReservation]      INT           NOT NULL,
-    [codeEmplacement]       INT NOT NULL,
+    [codeEmplacement]      NVARCHAR (3) NOT NULL,
     PRIMARY KEY CLUSTERED ([codeReservation] ASC),
 	PRIMARY KEY CLUSTERED ([codeEmplacement] ASC),
 	 CONSTRAINT [FK_dbo.Emplacement_Sejour_dbo.Reservation_codeReservation] FOREIGN KEY ([codeReservation]) 
