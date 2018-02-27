@@ -64,5 +64,7 @@
     <Build Include="Tarif.sql" />
     <Build Include="Emplacement.sql" />
     <Build Include="Reservation.sql" />
+    <Build Include="Option.sql" />
+    <Build Include="Detail_Option.sql" />
   </ItemGroup>
 </Project>
