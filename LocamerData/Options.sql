@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Option]
+﻿CREATE TABLE [dbo].[Options]
 (
 	[codeOption]      INT           IDENTITY (1, 1) NOT NULL,
     [libelleOption]       NVARCHAR (50) NOT NULL,

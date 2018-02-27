@@ -7,7 +7,7 @@
     PRIMARY KEY CLUSTERED ([codeReservation] ASC, [codeOption] ASC),
     CONSTRAINT [FK_dbo.Detail_Option_dbo.Reservation_codeReservation] FOREIGN KEY ([codeReservation]) 
         REFERENCES [dbo].[Reservation] ([codeReservation]) ON DELETE CASCADE,
-    CONSTRAINT [FK_dbo.Detail_Option_dbo.Option_codeOption] FOREIGN KEY ([codeOption]) 
-        REFERENCES [dbo].[Option] ([codeOption]) ON DELETE CASCADE
+    CONSTRAINT [FK_dbo.Detail_Option_dbo.Options_codeOption] FOREIGN KEY ([codeOption]) 
+        REFERENCES [dbo].[Options] ([codeOption]) ON DELETE CASCADE
 )
 

@@ -23,27 +23,27 @@ VALUES (libelleTarif, prixTarif);
 
 MERGE INTO Emplacement AS Target 
 USING (VALUES 
-        (A1, 1, 9, true), 
-        (A2, 1, 10, false), 
-        (A3, 2, 8, false),
-		(B1, 3, 3, true), 
-        (B2, 1, 10, false), 
-        (B3, 2, 6, true),
-		(C1, 2, 7, false), 
-        (C2, 2, 7, false), 
-        (C3, 2, 7, true),
-		(D1, 3, 5, true), 
-        (D2, 3, 5, true), 
-        (D3, 3, 4, true),
-		(E1, 1, 11, false), 
-        (E2, 1, 10, false), 
-        (E3, 1, 10, false)
+        ('A1', 1, 9, 1), 
+        ('A2', 1, 10, 0), 
+        ('A3', 2, 8, 0),
+		('B1', 3, 3, 1), 
+        ('B2', 1, 10, 0), 
+        ('B3', 2, 6, 1),
+		('C1', 2, 7, 0), 
+        ('C2', 2, 7, 0), 
+        ('C3', 2, 7, 1),
+		('D1', 3, 5, 1), 
+        ('D2', 3, 5, 1), 
+        ('D3', 3, 4, 1),
+		('E1', 1, 11, 0), 
+        ('E2', 1, 10, 0), 
+        ('E3', 1, 10, 0)
 ) 
-AS Source (codeEmplacement, codeTarif, capacite, terrase) 
+AS Source (codeEmplacement, codeTarif, capacite, terrasse) 
 ON Target.codeEmplacement = Source.codeEmplacement 
 WHEN NOT MATCHED BY TARGET THEN 
-INSERT (codeEmplacement, codeTarif, capacite, terrase) 
-VALUES (codeEmplacement, codeTarif, capacite, terrase);
+INSERT (codeTarif, capacite, terrasse) 
+VALUES (codeTarif, capacite, terrasse);
 
 MERGE INTO TypeSejour AS Target 
 USING (VALUES 
@@ -71,30 +71,6 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT (nomClient, prenomClient, emailClient, telephoneClient) 
 VALUES (nomClient, prenomClient, emailClient, telephoneClient);
 
-MERGE INTO Sejour AS Target 
-USING (VALUES 
-        (1, 1, '2018-06-01', '2018-06-08', 168), 
-        (2, 3, '2018-02-24', '2018-02-28', 154.4)
-		)
-AS Source (codeReservation, codeClient, dateDebut, dateFin, prixReservation) 
-ON Target.codeReservation = Source.codeReservation 
-WHEN NOT MATCHED BY TARGET THEN 
-INSERT (codeClient, dateDebut, dateFin, prixReservation) 
-VALUES (codeClient, dateDebut, dateFin, prixReservation);
-
-MERGE INTO Emplacement_Sejour AS Target 
-USING (VALUES 
-        (1, 'C3'),
-		(1, 'E3'), 
-        (2, 'C2')
-		)
-AS Source (codeReservation, codeEmplacement) 
-ON Target.codeReservation = Source.codeReservation
-ON Target.codeEmplacement = Source.codeEmplacement 
-WHEN NOT MATCHED BY TARGET THEN 
-INSERT (codeReservation, codeEmplacement) 
-VALUES (codeReservation, codeEmplacement);
-
 MERGE INTO Options AS Target 
 USING (VALUES 
         (1, 'Barbecue', 15, 3.00),
@@ -105,20 +81,9 @@ USING (VALUES
         (6, 'Vélo', 20, 8.00),
 		(7, 'Canoé', 10, 14.00)
 		)
-AS Source (codeOption, libelleOption, qteOption, prixOption) 
+AS Source (codeOption, libelleOption, qteDispo, prixOption) 
 ON Target.codeOption = Source.codeOption 
 WHEN NOT MATCHED BY TARGET THEN 
-INSERT (libelleOption, qteOption, prixOption) 
-VALUES (libelleOption, qteOption, prixOption);
+INSERT (libelleOption, qteDispo, prixOption) 
+VALUES (libelleOption, qteDispo, prixOption);
 
-MERGE INTO Detail_Options AS Target 
-USING (VALUES 
-        (2, 1, 1, 2),
-		(2, 6, 4, 2)
-		)
-AS Source (codeReservation, codeOption, qteDemande, dureeOption) 
-ON Target.codeReservation = Source.codeReservation
-ON Target.codeOption = Source.codeOption 
-WHEN NOT MATCHED BY TARGET THEN 
-INSERT (codeOption, qteDemande, dureeOption) 
-VALUES (codeOption, qteDemande, dureeOption);
