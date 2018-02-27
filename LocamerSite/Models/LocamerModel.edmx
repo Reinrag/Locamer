@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LocamerDataGroupe5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="codeClient" />
+          </Key>
+          <Property Name="codeClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenomClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emailClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephoneClient" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Detail_Option">
+          <Key>
+            <PropertyRef Name="codeReservation" />
+            <PropertyRef Name="codeOption" />
+          </Key>
+          <Property Name="codeReservation" Type="int" Nullable="false" />
+          <Property Name="codeOption" Type="int" Nullable="false" />
+          <Property Name="qteDemande" Type="int" Nullable="false" />
+          <Property Name="dureeOption" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Emplacement">
+          <Key>
+            <PropertyRef Name="codeEmplacement" />
+          </Key>
+          <Property Name="codeEmplacement" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="codeTarif" Type="int" />
+          <Property Name="capacite" Type="int" />
+          <Property Name="terrasse" Type="bit" />
+        </EntityType>
+        <EntityType Name="Emplacement_Sejour">
+          <Key>
+            <PropertyRef Name="codeReservation" />
+            <PropertyRef Name="codeEmplacement" />
+          </Key>
+          <Property Name="codeReservation" Type="int" Nullable="false" />
+          <Property Name="codeEmplacement" Type="nvarchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Options">
+          <Key>
+            <PropertyRef Name="codeOption" />
+          </Key>
+          <Property Name="codeOption" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelleOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="qteDispo" Type="int" Nullable="false" />
+          <Property Name="prixOption" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="codeReservation" />
+          </Key>
+          <Property Name="codeReservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codeClient" Type="int" />
+          <Property Name="codeSejour" Type="int" />
+          <Property Name="dateDebut" Type="datetime" Nullable="false" />
+          <Property Name="dateFin" Type="datetime" Nullable="false" />
+          <Property Name="prixReservation" Type="float" />
+        </EntityType>
+        <EntityType Name="Tarif">
+          <Key>
+            <PropertyRef Name="codeTarif" />
+          </Key>
+          <Property Name="codeTarif" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelleTarif" Type="nvarchar" MaxLength="50" />
+          <Property Name="prixTarif" Type="float" />
+        </EntityType>
+        <EntityType Name="TypeSejour">
+          <Key>
+            <PropertyRef Name="codeSejour" />
+          </Key>
+          <Property Name="codeSejour" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelleSejour" Type="nvarchar" MaxLength="50" />
+          <Property Name="coefSejour" Type="float" />
+        </EntityType>
+        <Association Name="FK_dbo_Detail_Option_dbo_Options_codeOption">
+          <End Role="Options" Type="Self.Options" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail_Option" Type="Self.Detail_Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Options">
+              <PropertyRef Name="codeOption" />
+            </Principal>
+            <Dependent Role="Detail_Option">
+              <PropertyRef Name="codeOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Detail_Option_dbo_Reservation_codeReservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail_Option" Type="Self.Detail_Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="codeReservation" />
+            </Principal>
+            <Dependent Role="Detail_Option">
+              <PropertyRef Name="codeReservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Emplacement_dbo_Tarif_codeTarif">
+          <End Role="Tarif" Type="Self.Tarif" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarif">
+              <PropertyRef Name="codeTarif" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="codeTarif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Emplacement_Sejour_dbo_Emplacement_codeEmplacement">
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Emplacement_Sejour" Type="Self.Emplacement_Sejour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emplacement">
+              <PropertyRef Name="codeEmplacement" />
+            </Principal>
+            <Dependent Role="Emplacement_Sejour">
+              <PropertyRef Name="codeEmplacement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Emplacement_Sejour_dbo_Reservation_codeReservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Emplacement_Sejour" Type="Self.Emplacement_Sejour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="codeReservation" />
+            </Principal>
+            <Dependent Role="Emplacement_Sejour">
+              <PropertyRef Name="codeReservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Reservation_dbo_Client_codeClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="codeClient" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="codeClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Reservation_dbo__TypeSejour_codeSejour">
+          <End Role="TypeSejour" Type="Self.TypeSejour" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeSejour">
+              <PropertyRef Name="codeSejour" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="codeSejour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LocamerDataGroupe5ModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detail_Option" EntityType="Self.Detail_Option" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emplacement" EntityType="Self.Emplacement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emplacement_Sejour" EntityType="Self.Emplacement_Sejour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Options" EntityType="Self.Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarif" EntityType="Self.Tarif" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeSejour" EntityType="Self.TypeSejour" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Detail_Option_dbo_Options_codeOption" Association="Self.FK_dbo_Detail_Option_dbo_Options_codeOption">
+            <End Role="Options" EntitySet="Options" />
+            <End Role="Detail_Option" EntitySet="Detail_Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Detail_Option_dbo_Reservation_codeReservation" Association="Self.FK_dbo_Detail_Option_dbo_Reservation_codeReservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Detail_Option" EntitySet="Detail_Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Emplacement_dbo_Tarif_codeTarif" Association="Self.FK_dbo_Emplacement_dbo_Tarif_codeTarif">
+            <End Role="Tarif" EntitySet="Tarif" />
+            <End Role="Emplacement" EntitySet="Emplacement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Emplacement_Sejour_dbo_Emplacement_codeEmplacement" Association="Self.FK_dbo_Emplacement_Sejour_dbo_Emplacement_codeEmplacement">
+            <End Role="Emplacement" EntitySet="Emplacement" />
+            <End Role="Emplacement_Sejour" EntitySet="Emplacement_Sejour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Emplacement_Sejour_dbo_Reservation_codeReservation" Association="Self.FK_dbo_Emplacement_Sejour_dbo_Reservation_codeReservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Emplacement_Sejour" EntitySet="Emplacement_Sejour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Reservation_dbo_Client_codeClient" Association="Self.FK_dbo_Reservation_dbo_Client_codeClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Reservation_dbo__TypeSejour_codeSejour" Association="Self.FK_dbo_Reservation_dbo__TypeSejour_codeSejour">
+            <End Role="TypeSejour" EntitySet="TypeSejour" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocamerDataGroupe5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="codeClient" />
+          </Key>
+          <Property Name="codeClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prenomClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emailClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephoneClient" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_dbo_Reservation_dbo_Client_codeClient" FromRole="Client" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Detail_Option">
+          <Key>
+            <PropertyRef Name="codeReservation" />
+            <PropertyRef Name="codeOption" />
+          </Key>
+          <Property Name="codeReservation" Type="Int32" Nullable="false" />
+          <Property Name="codeOption" Type="Int32" Nullable="false" />
+          <Property Name="qteDemande" Type="Int32" Nullable="false" />
+          <Property Name="dureeOption" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="Self.FK_dbo_Detail_Option_dbo_Options_codeOption" FromRole="Detail_Option" ToRole="Options" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_dbo_Detail_Option_dbo_Reservation_codeReservation" FromRole="Detail_Option" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Emplacement">
+          <Key>
+            <PropertyRef Name="codeEmplacement" />
+          </Key>
+          <Property Name="codeEmplacement" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codeTarif" Type="Int32" />
+          <Property Name="capacite" Type="Int32" />
+          <Property Name="terrasse" Type="Boolean" />
+          <NavigationProperty Name="Tarif" Relationship="Self.FK_dbo_Emplacement_dbo_Tarif_codeTarif" FromRole="Emplacement" ToRole="Tarif" />
+          <NavigationProperty Name="Reservations" Relationship="Self.Emplacement_Sejour" FromRole="Emplacement" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Option1">
+          <Key>
+            <PropertyRef Name="codeOption" />
+          </Key>
+          <Property Name="codeOption" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelleOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="qteDispo" Type="Int32" Nullable="false" />
+          <Property Name="prixOption" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Detail_Option" Relationship="Self.FK_dbo_Detail_Option_dbo_Options_codeOption" FromRole="Options" ToRole="Detail_Option" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="codeReservation" />
+          </Key>
+          <Property Name="codeReservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codeClient" Type="Int32" />
+          <Property Name="dateDebut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="prixReservation" Type="Double" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Reservation_dbo_Client_codeClient" FromRole="Reservation" ToRole="Client" />
+          <NavigationProperty Name="Detail_Option" Relationship="Self.FK_dbo_Detail_Option_dbo_Reservation_codeReservation" FromRole="Reservation" ToRole="Detail_Option" />
+          <NavigationProperty Name="Emplacements" Relationship="Self.Emplacement_Sejour" FromRole="Reservation" ToRole="Emplacement" />
+          <Property Name="codeSejour" Type="Int32" />
+          <NavigationProperty Name="TypeSejour" Relationship="LocamerDataGroupe5Model.FK_dbo_Reservation_dbo__TypeSejour_codeSejour" FromRole="Reservation" ToRole="TypeSejour" />
+        </EntityType>
+        <EntityType Name="Tarif">
+          <Key>
+            <PropertyRef Name="codeTarif" />
+          </Key>
+          <Property Name="codeTarif" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelleTarif" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="prixTarif" Type="Double" />
+          <NavigationProperty Name="Emplacements" Relationship="Self.FK_dbo_Emplacement_dbo_Tarif_codeTarif" FromRole="Tarif" ToRole="Emplacement" />
+        </EntityType>
+        <EntityType Name="TypeSejour">
+          <Key>
+            <PropertyRef Name="codeSejour" />
+          </Key>
+          <Property Name="codeSejour" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelleSejour" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="coefSejour" Type="Double" />
+          <NavigationProperty Name="Reservations" Relationship="LocamerDataGroupe5Model.FK_dbo_Reservation_dbo__TypeSejour_codeSejour" FromRole="TypeSejour" ToRole="Reservation" />
+        </EntityType>
+        <Association Name="FK_dbo_Reservation_dbo_Client_codeClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="codeClient" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="codeClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Detail_Option_dbo_Options_codeOption">
+          <End Role="Options" Type="Self.Option1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail_Option" Type="Self.Detail_Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Options">
+              <PropertyRef Name="codeOption" />
+            </Principal>
+            <Dependent Role="Detail_Option">
+              <PropertyRef Name="codeOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Detail_Option_dbo_Reservation_codeReservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail_Option" Type="Self.Detail_Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="codeReservation" />
+            </Principal>
+            <Dependent Role="Detail_Option">
+              <PropertyRef Name="codeReservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Emplacement_dbo_Tarif_codeTarif">
+          <End Role="Tarif" Type="Self.Tarif" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarif">
+              <PropertyRef Name="codeTarif" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="codeTarif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Emplacement_Sejour">
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="LocamerDataGroupe5Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Detail_Option" EntityType="Self.Detail_Option" />
+          <EntitySet Name="Emplacements" EntityType="Self.Emplacement" />
+          <EntitySet Name="Options1" EntityType="Self.Option1" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Tarifs" EntityType="Self.Tarif" />
+          <EntitySet Name="TypeSejours" EntityType="Self.TypeSejour" />
+          <AssociationSet Name="FK_dbo_Reservation_dbo_Client_codeClient" Association="Self.FK_dbo_Reservation_dbo_Client_codeClient">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Detail_Option_dbo_Options_codeOption" Association="Self.FK_dbo_Detail_Option_dbo_Options_codeOption">
+            <End Role="Options" EntitySet="Options1" />
+            <End Role="Detail_Option" EntitySet="Detail_Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Detail_Option_dbo_Reservation_codeReservation" Association="Self.FK_dbo_Detail_Option_dbo_Reservation_codeReservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Detail_Option" EntitySet="Detail_Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Emplacement_dbo_Tarif_codeTarif" Association="Self.FK_dbo_Emplacement_dbo_Tarif_codeTarif">
+            <End Role="Tarif" EntitySet="Tarifs" />
+            <End Role="Emplacement" EntitySet="Emplacements" />
+          </AssociationSet>
+          <AssociationSet Name="Emplacement_Sejour" Association="Self.Emplacement_Sejour">
+            <End Role="Emplacement" EntitySet="Emplacements" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Reservation_dbo__TypeSejour_codeSejour" Association="LocamerDataGroupe5Model.FK_dbo_Reservation_dbo__TypeSejour_codeSejour">
+            <End Role="TypeSejour" EntitySet="TypeSejours" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_dbo_Reservation_dbo__TypeSejour_codeSejour">
+          <End Type="LocamerDataGroupe5Model.TypeSejour" Role="TypeSejour" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LocamerDataGroupe5Model.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeSejour">
+              <PropertyRef Name="codeSejour" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="codeSejour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LocamerDataGroupe5ModelStoreContainer" CdmEntityContainer="LocamerDataGroupe5Entities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="LocamerDataGroupe5Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="codeClient" ColumnName="codeClient" />
+                <ScalarProperty Name="nomClient" ColumnName="nomClient" />
+                <ScalarProperty Name="prenomClient" ColumnName="prenomClient" />
+                <ScalarProperty Name="emailClient" ColumnName="emailClient" />
+                <ScalarProperty Name="telephoneClient" ColumnName="telephoneClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detail_Option">
+            <EntityTypeMapping TypeName="LocamerDataGroupe5Model.Detail_Option">
+              <MappingFragment StoreEntitySet="Detail_Option">
+                <ScalarProperty Name="codeReservation" ColumnName="codeReservation" />
+                <ScalarProperty Name="codeOption" ColumnName="codeOption" />
+                <ScalarProperty Name="qteDemande" ColumnName="qteDemande" />
+                <ScalarProperty Name="dureeOption" ColumnName="dureeOption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emplacements">
+            <EntityTypeMapping TypeName="LocamerDataGroupe5Model.Emplacement">
+              <MappingFragment StoreEntitySet="Emplacement">
+                <ScalarProperty Name="codeEmplacement" ColumnName="codeEmplacement" />
+                <ScalarProperty Name="codeTarif" ColumnName="codeTarif" />
+                <ScalarProperty Name="capacite" ColumnName="capacite" />
+                <ScalarProperty Name="terrasse" ColumnName="terrasse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Options1">
+            <EntityTypeMapping TypeName="LocamerDataGroupe5Model.Option1">
+              <MappingFragment StoreEntitySet="Options">
+                <ScalarProperty Name="codeOption" ColumnName="codeOption" />
+                <ScalarProperty Name="libelleOption" ColumnName="libelleOption" />
+                <ScalarProperty Name="qteDispo" ColumnName="qteDispo" />
+                <ScalarProperty Name="prixOption" ColumnName="prixOption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="LocamerDataGroupe5Model.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="codeSejour" ColumnName="codeSejour" />
+                <ScalarProperty Name="codeReservation" ColumnName="codeReservation" />
+                <ScalarProperty Name="codeClient" ColumnName="codeClient" />
+                <ScalarProperty Name="dateDebut" ColumnName="dateDebut" />
+                <ScalarProperty Name="dateFin" ColumnName="dateFin" />
+                <ScalarProperty Name="prixReservation" ColumnName="prixReservation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarifs">
+            <EntityTypeMapping TypeName="LocamerDataGroupe5Model.Tarif">
+              <MappingFragment StoreEntitySet="Tarif">
+                <ScalarProperty Name="codeTarif" ColumnName="codeTarif" />
+                <ScalarProperty Name="libelleTarif" ColumnName="libelleTarif" />
+                <ScalarProperty Name="prixTarif" ColumnName="prixTarif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeSejours">
+            <EntityTypeMapping TypeName="LocamerDataGroupe5Model.TypeSejour">
+              <MappingFragment StoreEntitySet="TypeSejour">
+                <ScalarProperty Name="codeSejour" ColumnName="codeSejour" />
+                <ScalarProperty Name="libelleSejour" ColumnName="libelleSejour" />
+                <ScalarProperty Name="coefSejour" ColumnName="coefSejour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Emplacement_Sejour" TypeName="LocamerDataGroupe5Model.Emplacement_Sejour" StoreEntitySet="Emplacement_Sejour">
+            <EndProperty Name="Emplacement">
+              <ScalarProperty Name="codeEmplacement" ColumnName="codeEmplacement" />
+            </EndProperty>
+            <EndProperty Name="Reservation">
+              <ScalarProperty Name="codeReservation" ColumnName="codeReservation" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

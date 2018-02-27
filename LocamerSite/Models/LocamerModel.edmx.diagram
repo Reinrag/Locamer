@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="43d8be2d36f9466193af410bf49bb87f" Name="Diagram1">
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.Client" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.Detail_Option" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.Emplacement" Width="1.5" PointX="2.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.Option1" Width="1.5" PointX="9.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.Reservation" Width="1.5" PointX="5.125" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.Tarif" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.TypeSejour" Width="1.5" PointX="5.5" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Reservation_dbo_Client_codeClient" ManuallyRouted="false" />
+        <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Detail_Option_dbo_Options_codeOption" ManuallyRouted="false" />
+        <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Detail_Option_dbo_Reservation_codeReservation" ManuallyRouted="false" />
+        <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Emplacement_dbo_Tarif_codeTarif" ManuallyRouted="false" />
+        <AssociationConnector Association="LocamerDataGroupe5Model.Emplacement_Sejour" ManuallyRouted="false" />
+        <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Reservation_dbo__TypeSejour_codeSejour" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
