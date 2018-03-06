@@ -234,9 +234,11 @@
       <DependentUpon>LocamerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\Option1.cs">
       <DependentUpon>LocamerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\Reservation.cs">
       <DependentUpon>LocamerModel.tt</DependentUpon>
     </Compile>
