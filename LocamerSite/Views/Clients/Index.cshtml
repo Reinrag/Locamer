@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LocamerSite.Models.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nomClient)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prenomClient)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emailClient)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telephoneClient)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomClient)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prenomClient)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailClient)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telephoneClient)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.codeClient }) |
+            @Html.ActionLink("Details", "Details", new { id=item.codeClient }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.codeClient })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,50 @@
+﻿@model LocamerSite.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenomClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenomClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephoneClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephoneClient)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.codeClient }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
