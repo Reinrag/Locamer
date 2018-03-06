@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Créer un nouveau client", "Create")
 </p>
 <table class="table">
     <tr>
@@ -16,12 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.prenomClient)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.emailClient)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telephoneClient)
         </th>
         <th></th>
     </tr>
@@ -35,15 +29,9 @@
             @Html.DisplayFor(modelItem => item.prenomClient)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.emailClient)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telephoneClient)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.codeClient }) |
+            @Html.ActionLink("Modifier", "Edit", new { id=item.codeClient }) |
             @Html.ActionLink("Details", "Details", new { id=item.codeClient }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.codeClient })
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.codeClient })
         </td>
     </tr>
 }

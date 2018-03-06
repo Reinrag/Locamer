@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Créer un nouveau séjour", "Create")
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.TypeSejour.libelleSejour)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.codeReservation }) |
+            @Html.ActionLink("Modifier", "Edit", new { id=item.codeReservation }) |
             @Html.ActionLink("Details", "Details", new { id=item.codeReservation }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.codeReservation })
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.codeReservation })
         </td>
     </tr>
 }

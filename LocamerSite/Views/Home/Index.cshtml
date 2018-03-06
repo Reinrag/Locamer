@@ -7,7 +7,19 @@
 <div class="row">
     <div class="col-lg-4">
         <h3>Les clients</h3>
-        <p>Ce module vous permet de créer, modifier et supprimer des clients du camping</p>
-        @Html.ActionLink("Liste des client", "Index", "Client", new { @class="btn btn-primary" })
+        <p>Ce module vous permet de créer, modifier et supprimer des clients du camping.</p>
+        <a role="button" href="/Clients/Index" class="btn btn-info">Liste des clients</a>
+        <h3>Les emplacements</h3>
+        <p>Ce module vous permet de créer, modifier et supprimer des emplacements du camping.</p>
+        <a role="button" href="/Emplacements/Index" class="btn btn-info">Liste des emplacements</a>
+        <h3>Les séjours</h3>
+        <p>Ce module vous permet de créer, modifier et supprimer des séjours du camping.<br><br>Il permet également de générer le coût total d'un séjour en fonction des emplacements et des options du client.</p>
+        <a role="button" href="/Reservations/Index" class="btn btn-info">Liste des séjours</a>
+        <h3>Les options</h3>
+        <p>Ce module vous permet de créer, modifier et supprimer des options disponibles à a location.</p>
+        <a role="button" href="/Option1/Index" class="btn btn-info">Liste des options</a>
+    </div>
+    <div class="col-lg-8">
+        <img src="/Images/mobile_home_1.jpg">
     </div>
 </div>
