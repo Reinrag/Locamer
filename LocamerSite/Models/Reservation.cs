@@ -34,5 +34,11 @@ namespace LocamerSite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Emplacement> Emplacements { get; set; }
         public virtual TypeSejour TypeSejour { get; set; }
+        public int Durée ()
+        {
+            return this.dateFin.Subtract(dateDebut).Days;
+        }
+
+
     }
 }

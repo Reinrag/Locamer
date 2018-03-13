@@ -52,6 +52,40 @@
 
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            Code
+        </th>
+        <th>
+            Capacité
+        </th>
+        <th>
+            Terrasse
+        </th>
+        <th>
+            Catégorie
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Emplacements)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codeEmplacement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.capacite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.terrasse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codeTarif)
+            </td>
+        </tr>
+    }
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.codeReservation }) |
     @Html.ActionLink("Back to List", "Index")
