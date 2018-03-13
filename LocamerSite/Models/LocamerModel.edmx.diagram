@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="LocamerDataGroupe5Model.Option1" Width="1.5" PointX="9.5" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LocamerDataGroupe5Model.Reservation" Width="1.5" PointX="5.125" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LocamerDataGroupe5Model.Tarif" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LocamerDataGroupe5Model.TypeSejour" Width="1.5" PointX="5.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocamerDataGroupe5Model.TypeSejour" Width="1.5" PointX="7" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Reservation_dbo_Client_codeClient" ManuallyRouted="false" />
         <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Detail_Option_dbo_Options_codeOption" ManuallyRouted="false" />
         <AssociationConnector Association="LocamerDataGroupe5Model.FK_dbo_Detail_Option_dbo_Reservation_codeReservation" ManuallyRouted="false" />

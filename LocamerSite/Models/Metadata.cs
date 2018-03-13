@@ -1,24 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
 namespace LocamerSite.Models
 {
-    public class ReservationsMetadata
+    public class ReservationMetadata
     {
-        [StringLength(50)]
-        [Display(Name = "Nom du client")]
-        public string codeClient;
-
         [Display(Name = "Date début de séjour")]
-        public Nullable<System.DateTime> dateDebut;
+        [DataType(DataType.Date)]
+        public DateTime dateDebut;
 
-        [StringLength(50)]
+        [DataType(DataType.Date)]
         [Display(Name = "Date de fin de séjour")]
-        public Nullable<System.DateTime> dateFin;;
+        public DateTime dateFin;
 
-        [StringLength(50)]
-        [Display(Name = "Type de séjour")]
-        public string codeSejour;
     }
    
 }
