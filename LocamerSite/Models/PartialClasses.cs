@@ -10,4 +10,13 @@ namespace LocamerSite.Models
     public partial class Reservation
     {
     }
+
+    [MetadataType(typeof(ClientMetadata))]
+    public partial class Client
+    {
+    }
+    [MetadataType(typeof(TypeSejourMetadata))]
+    public partial class TypeSejour
+    {
+    }
 }
