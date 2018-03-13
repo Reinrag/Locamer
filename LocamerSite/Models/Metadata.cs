@@ -37,4 +37,24 @@ namespace LocamerSite.Models
         [Display(Name = "Type de séjour")]
         public string libelleSejour;
     }
+    public class OptionMetadata
+    {
+        [Display(Name = "Option")]
+        public string libelleOption;
+
+        [Display(Name = "Quantité totale")]
+        public int qteDispo;
+
+        [Display(Name = "Tarif de l'option")]
+        public int prixOption;
+    }
+
+    public class EmplacementsMetadata
+    {
+        [Display(Name = "Nombre de place")]
+        public int capacite;
+
+        [Display(Name = "Catégorie d'emplacement")]
+        public string libelleTarif;
+    }
 }
